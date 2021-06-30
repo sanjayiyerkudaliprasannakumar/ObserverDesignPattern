@@ -7,7 +7,7 @@ public class SubjectDemo implements Subject{
     private List<Observer> observerList = null;
     private String message;
 
-    private SubjectDemo(){
+    public SubjectDemo (){
         observerList = new ArrayList<>();
     }
 
@@ -27,16 +27,24 @@ public class SubjectDemo implements Subject{
 
     @Override
     public void notifyObservers() {
-
+        if(observerList != null && !observerList.isEmpty()){
+            for(Observer observer : observerList){
+                observer.update (message);
+            }
+        } else {
+            System.out.println("No observers to notify!!!!");
+        }
     }
 
     @Override
     public Object getUpdate() {
-        return null;
+        return message;
     }
 
     @Override
     public void postMessage(String message) {
-
+        System.out.println ("Message posted on topic :" + message);
+        this.message = message;
+        notifyObservers ();
     }
 }
