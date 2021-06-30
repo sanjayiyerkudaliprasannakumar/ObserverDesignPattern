@@ -12,13 +12,17 @@ public class SubjectDemo implements Subject{
     }
 
     @Override
-    public void register(Observer observer) {
-
+    public
+    void register ( Observer observer ) {
+        if ( observer == null ) {
+            throw new NullPointerException ( );
+        }
+        observerList.add(observer);
     }
 
     @Override
     public void unregister(Observer observer) {
-
+        observerList.remove(observer);
     }
 
     @Override
